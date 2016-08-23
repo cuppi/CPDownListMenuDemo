@@ -13,6 +13,12 @@
 		BB2A1AAC1D62EE8E00F55FFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2A1AAA1D62EE8E00F55FFF /* Main.storyboard */; };
 		BB2A1AAE1D62EE8E00F55FFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB2A1AAD1D62EE8E00F55FFF /* Assets.xcassets */; };
 		BB2A1AB11D62EE8E00F55FFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2A1AAF1D62EE8E00F55FFF /* LaunchScreen.storyboard */; };
+		BB2A1ABB1D62F0BE00F55FFF /* CPDownListMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2A1ABA1D62F0BE00F55FFF /* CPDownListMenu.m */; };
+		BB2A1AC41D62F50B00F55FFF /* UIView+CPGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2A1AC31D62F50B00F55FFF /* UIView+CPGrid.m */; };
+		BB9825291D6ADFA80024A678 /* CPDownListMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9825281D6ADFA80024A678 /* CPDownListMenuItem.m */; };
+		BB98252C1D6AF2190024A678 /* CPDownListMenuAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = BB98252B1D6AF2190024A678 /* CPDownListMenuAppearance.m */; };
+		BB98252E1D6B01D50024A678 /* 底部.png in Resources */ = {isa = PBXBuildFile; fileRef = BB98252D1D6B01D50024A678 /* 底部.png */; };
+		BBCADC8C1D6BEF9300E7B53A /* CPFlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BBCADC8B1D6BEF9300E7B53A /* CPFlexibleButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,18 @@
 		BB2A1AAD1D62EE8E00F55FFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB2A1AB01D62EE8E00F55FFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB2A1AB21D62EE8E00F55FFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB2A1AB91D62F0BE00F55FFF /* CPDownListMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDownListMenu.h; sourceTree = "<group>"; };
+		BB2A1ABA1D62F0BE00F55FFF /* CPDownListMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDownListMenu.m; sourceTree = "<group>"; };
+		BB2A1AC21D62F50B00F55FFF /* UIView+CPGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CPGrid.h"; sourceTree = "<group>"; };
+		BB2A1AC31D62F50B00F55FFF /* UIView+CPGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CPGrid.m"; sourceTree = "<group>"; };
+		BB9825271D6ADFA80024A678 /* CPDownListMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDownListMenuItem.h; sourceTree = "<group>"; };
+		BB9825281D6ADFA80024A678 /* CPDownListMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDownListMenuItem.m; sourceTree = "<group>"; };
+		BB98252A1D6AF2190024A678 /* CPDownListMenuAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDownListMenuAppearance.h; sourceTree = "<group>"; };
+		BB98252B1D6AF2190024A678 /* CPDownListMenuAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDownListMenuAppearance.m; sourceTree = "<group>"; };
+		BB98252D1D6B01D50024A678 /* 底部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部.png"; sourceTree = "<group>"; };
+		BB98252F1D6B0D710024A678 /* CPDownListMenuMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPDownListMenuMacro.h; sourceTree = "<group>"; };
+		BBCADC8A1D6BEF9300E7B53A /* CPFlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFlexibleButton.h; sourceTree = "<group>"; };
+		BBCADC8B1D6BEF9300E7B53A /* CPFlexibleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlexibleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +60,8 @@
 		BB2A1A951D62EE8E00F55FFF = {
 			isa = PBXGroup;
 			children = (
+				BB98252D1D6B01D50024A678 /* 底部.png */,
+				BB2A1AB81D62F0AA00F55FFF /* CPDownListMenu */,
 				BB2A1AA01D62EE8E00F55FFF /* CPDownListMenuDemo */,
 				BB2A1A9F1D62EE8E00F55FFF /* Products */,
 			);
@@ -77,6 +97,24 @@
 				BB2A1AA21D62EE8E00F55FFF /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BB2A1AB81D62F0AA00F55FFF /* CPDownListMenu */ = {
+			isa = PBXGroup;
+			children = (
+				BBCADC8A1D6BEF9300E7B53A /* CPFlexibleButton.h */,
+				BBCADC8B1D6BEF9300E7B53A /* CPFlexibleButton.m */,
+				BB2A1AC21D62F50B00F55FFF /* UIView+CPGrid.h */,
+				BB2A1AC31D62F50B00F55FFF /* UIView+CPGrid.m */,
+				BB2A1AB91D62F0BE00F55FFF /* CPDownListMenu.h */,
+				BB2A1ABA1D62F0BE00F55FFF /* CPDownListMenu.m */,
+				BB9825271D6ADFA80024A678 /* CPDownListMenuItem.h */,
+				BB9825281D6ADFA80024A678 /* CPDownListMenuItem.m */,
+				BB98252A1D6AF2190024A678 /* CPDownListMenuAppearance.h */,
+				BB98252B1D6AF2190024A678 /* CPDownListMenuAppearance.m */,
+				BB98252F1D6B0D710024A678 /* CPDownListMenuMacro.h */,
+			);
+			path = CPDownListMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +176,7 @@
 			files = (
 				BB2A1AB11D62EE8E00F55FFF /* LaunchScreen.storyboard in Resources */,
 				BB2A1AAE1D62EE8E00F55FFF /* Assets.xcassets in Resources */,
+				BB98252E1D6B01D50024A678 /* 底部.png in Resources */,
 				BB2A1AAC1D62EE8E00F55FFF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,8 +189,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB2A1AA91D62EE8E00F55FFF /* ViewController.m in Sources */,
+				BB98252C1D6AF2190024A678 /* CPDownListMenuAppearance.m in Sources */,
+				BB9825291D6ADFA80024A678 /* CPDownListMenuItem.m in Sources */,
+				BB2A1AC41D62F50B00F55FFF /* UIView+CPGrid.m in Sources */,
 				BB2A1AA61D62EE8E00F55FFF /* AppDelegate.m in Sources */,
 				BB2A1AA31D62EE8E00F55FFF /* main.m in Sources */,
+				BB2A1ABB1D62F0BE00F55FFF /* CPDownListMenu.m in Sources */,
+				BBCADC8C1D6BEF9300E7B53A /* CPFlexibleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +344,7 @@
 				BB2A1AB71D62EE8E00F55FFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
