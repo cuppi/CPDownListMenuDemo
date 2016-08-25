@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CPFlexibleButton;
 
 @interface CPDownListMenuItem : UIView
 @property (copy, nonatomic) void(^clickBlock)();
-@property (retain, nonatomic) UIButton *titleButton;
+@property (retain, nonatomic) CPFlexibleButton *titleButton;
 - (void)fillDataWithTitle:(NSString *)title;
 @end

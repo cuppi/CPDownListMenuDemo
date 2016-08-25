@@ -28,7 +28,7 @@
 - (void)cp_configureCell
 {
     [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cp_actionClickGesture)]];
-    _titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _titleButton = [CPFlexibleButton buttonWithType:UIButtonTypeCustom];
     [self addSubview:_titleButton];
     [_titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _titleButton.userInteractionEnabled = NO;

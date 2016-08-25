@@ -15,14 +15,15 @@ static NSInteger const CPDownListMenuUnShow = -1;
 @class CPDownListMenu;
 @protocol CPDownListMenuDelegate <NSObject>
 @optional
-- (void)downListMenu:(CPDownListMenu *)downListMenu didSelectMenuAtIndex:(NSInteger)index;
+- (void)downListMenu:(CPDownListMenu *)downListMenu didSelectMenuAtIndex:(NSInteger)index menuItem:(CPDownListMenuItem *)menuItem;
 - (void)downListMenu:(CPDownListMenu *)downListMenu didSelectCellAtIndexPath:(NSIndexPath *)indexPath;
+- (void)downListMenu:(CPDownListMenu *)downListMenu willShowDownListAtIndex:(NSInteger)index;
+- (void)downListMenu:(CPDownListMenu *)downListMenu willHideDownListAtIndex:(NSInteger)index;
 @end
 
 @protocol CPDownListMenuDatasource <NSObject>
 - (NSInteger)downListMenu:(CPDownListMenu *)downListMenu numberOfCellsAtMenuIndex:(NSInteger)index;
 - (UITableViewCell *)downListMenu:(CPDownListMenu *)downListMenu cellAtIndexPath:(NSIndexPath *)indexPath;
-
 @optional
 - (NSInteger)numberOfMenuCellsInDownListMenu:(CPDownListMenu *)downListMenu;
 - (UIView *)downListMenu:(CPDownListMenu *)downListMenu viewForFooterAtMenuIndex:(NSInteger)index;
@@ -37,9 +38,12 @@ static NSInteger const CPDownListMenuUnShow = -1;
        downListMenuAppearance:(CPDownListMenuAppearance *)downListMenuAppearance;
 @property (assign, nonatomic) id<CPDownListMenuDelegate> delegate;
 @property (assign, nonatomic) id<CPDownListMenuDatasource> datasource;
+@property (readonly, nonatomic) NSArray <CPDownListMenuItem const *>*allMenuItems;
 @property (retain, nonatomic) UIView *stickView;
+@property (assign, nonatomic) CGRect absoluteFrame;
 @property (readonly, nonatomic) CPDownListMenuAppearance *appearance;
 @property (assign, nonatomic) BOOL autoFoldDownList;
+@property (readonly, nonatomic) BOOL showDownList;
 // 获取下拉列表的tableView importment: 该属性只限于设置tableView的UI属性 不要通过这个属性改变tableview的代理HeaderView
 @property (retain, nonatomic) UITableView *dataTableView;
 
@@ -47,6 +51,7 @@ static NSInteger const CPDownListMenuUnShow = -1;
 - (void)setMenuTitle:(NSString *)title
              atIndex:(NSInteger)index;
 - (void)showMenuAtIndex:(NSInteger)index;
+- (void)hideMenuWithCompletion:(void (^)(BOOL finished))completion;
 - (void)hideMenu;
 - (void)reloadData;
 @end

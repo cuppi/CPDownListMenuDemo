@@ -14,10 +14,11 @@
 @interface CPDownListMenu() <UITableViewDelegate, UITableViewDataSource>
 {
     CPDownListMenuAppearance *_appearance;
-    NSMutableArray <CPDownListMenuItem *>*_cellList;
+    NSMutableArray <CPDownListMenuItem *>*_menuItems;
     UIView *_headerView;
     UIView *_dataView;
     UIView *_footerView;
+    BOOL _isShowDownList;
 }
 @end
 
@@ -66,8 +67,9 @@
 
 - (void)createMetadata
 {
-    _cellList = [NSMutableArray arrayWithCapacity:10];
+    _menuItems = [NSMutableArray arrayWithCapacity:10];
     _showMenuIndex = CPDownListMenuUnShow;
+    _absoluteFrame = CGRectNull;
 }
 
 - (void)createAppearanceListener
@@ -97,19 +99,31 @@
 - (void)setStickView:(UIView *)stickView
 {
     _stickView = stickView;
-    _dataView.frame = [self convertRect:_dataView.frame toView:_stickView];
+    if (CGRectEqualToRect(_absoluteFrame, CGRectNull)) {
+        _dataView.frame = [self convertRect:_dataView.frame toView:_stickView];
+    }
+    else
+    {
+        _dataView.frame = _absoluteFrame;
+    }
     [_stickView addSubview:_dataView];
+}
+
+- (void)setAbsoluteFrame:(CGRect)absoluteFrame
+{
+    _absoluteFrame = CGRectMake(absoluteFrame.origin.x, absoluteFrame.origin.y, absoluteFrame.size.width, 0);
+    _dataView.frame = _absoluteFrame;
 }
 
 - (void)setMenuTitle:(NSString *)title
              atIndex:(NSInteger)index
 {
     if (index < 0 ||
-        index >= _cellList.count) {
+        index >= _menuItems.count) {
         NSLog(@"菜单index不合法");
         return;
     }
-    CPDownListMenuItem *item = _cellList[index];
+    CPDownListMenuItem *item = _menuItems[index];
     [item fillDataWithTitle:title];
 }
 
@@ -118,10 +132,10 @@
     if (!self.datasource) {
         return;
     }
-    [_cellList enumerateObjectsUsingBlock:^(CPDownListMenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_menuItems enumerateObjectsUsingBlock:^(CPDownListMenuItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj removeFromSuperview];
     }];
-    [_cellList removeAllObjects];
+    [_menuItems removeAllObjects];
     
     NSInteger count = 1;
     if ([self.datasource respondsToSelector:@selector(numberOfMenuCellsInDownListMenu:)]) {
@@ -135,11 +149,13 @@
         if ([self.datasource respondsToSelector:@selector(downListMenu:menuAtIndex:)]) {
             item = [self.datasource downListMenu:self menuAtIndex:i];
         }
-        [self addSubview:item];
-        [_cellList addObject:item];
+        [self insertSubview:item atIndex:0];
+        [_menuItems addObject:item];
         item.frame = CGRectMake(i*width, 0, width, height);
         __weak typeof(self) selfWeak = self;
+        __weak typeof(item) itemWeak = item;
         [item setClickBlock:^{
+#warning "The word - did is mismatch"
             if (_autoFoldDownList) {
                 if (_showMenuIndex != i) {
                     [selfWeak showMenuAtIndex:i];
@@ -149,8 +165,9 @@
                     [selfWeak hideMenu];
                 }
             }
-            if ([self.delegate respondsToSelector:@selector(downListMenu:didSelectMenuAtIndex:)]) {
-                [self.delegate downListMenu:self didSelectMenuAtIndex:i];
+            
+            if ([self.delegate respondsToSelector:@selector(downListMenu:didSelectMenuAtIndex:menuItem:)]) {
+                [self.delegate downListMenu:self didSelectMenuAtIndex:i menuItem:itemWeak];
             }
         }];
         if (i) {
@@ -166,6 +183,16 @@
 }
 
 #pragma mark -- 接口函数
+- (BOOL)showDownList
+{
+    return _showMenuIndex != CPDownListMenuUnShow;
+}
+
+- (NSArray <CPDownListMenuItem *>*)allMenuItems
+{
+    return _menuItems;
+}
+
 - (__kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier
 {
     UITableViewCell *cell = [_dataTableView dequeueReusableCellWithIdentifier:identifier];
@@ -175,6 +202,9 @@
 
 - (void)showMenuAtIndex:(NSInteger)index
 {
+    if ([self.delegate respondsToSelector:@selector(downListMenu:willShowDownListAtIndex:)]) {
+        [self.delegate downListMenu:self willShowDownListAtIndex:index];
+    }
     _showMenuIndex = index;
     [_footerView removeFromSuperview];
     [_headerView removeFromSuperview];
@@ -183,7 +213,7 @@
         _headerView =  _appearance.headerView;
     }
     if ([self.delegate respondsToSelector:@selector(downListMenu:viewForHeaderAtMenuIndex:)]) {
-        _headerView = [self.datasource downListMenu:self viewForHeaderAtMenuIndex:_showMenuIndex];
+        _headerView = [self.datasource downListMenu:self viewForHeaderAtMenuIndex:index];
     }
     if (_headerView) {
         [_dataView addSubview:_headerView];
@@ -193,7 +223,7 @@
         _footerView =  _appearance.footerView;
     }
     if ([self.delegate respondsToSelector:@selector(downListMenu:viewForFooterAtMenuIndex:)]) {
-        _footerView = [self.datasource downListMenu:self viewForFooterAtMenuIndex:_showMenuIndex];
+        _footerView = [self.datasource downListMenu:self viewForFooterAtMenuIndex:index];
     }
     if (_footerView) {
         [_dataView addSubview:_footerView];
@@ -210,15 +240,23 @@
     [_dataTableView reloadData];
 }
 
-- (void)hideMenu
+- (void)hideMenuWithCompletion:(void (^)(BOOL finished))completion
 {
+    if ([self.delegate respondsToSelector:@selector(downListMenu:willHideDownListAtIndex:)]) {
+        [self.delegate downListMenu:self willHideDownListAtIndex:_showMenuIndex];
+    }
     _showMenuIndex = CPDownListMenuUnShow;
     [UIView animateWithDuration:0.3 animations:^{
         _dataView.cp_height = 0;
         _dataTableView.cp_top = 0;
         _dataTableView.cp_height = 0;
         _footerView.cp_top = 0;
-    }];
+    } completion:completion];
+}
+
+- (void)hideMenu
+{
+    [self hideMenuWithCompletion:nil];
 }
 
 /*
@@ -247,8 +285,6 @@
             [_dataTableView registerNib:cellNib forCellReuseIdentifier:identifier];
         }];
     }
-    
-    
 }
 
 #pragma mark -- tableView delegate
