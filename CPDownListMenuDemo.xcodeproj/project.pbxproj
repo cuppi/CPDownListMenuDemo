@@ -18,7 +18,6 @@
 		BB9825291D6ADFA80024A678 /* CPDownListMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9825281D6ADFA80024A678 /* CPDownListMenuItem.m */; };
 		BB98252C1D6AF2190024A678 /* CPDownListMenuAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = BB98252B1D6AF2190024A678 /* CPDownListMenuAppearance.m */; };
 		BB98252E1D6B01D50024A678 /* 底部.png in Resources */ = {isa = PBXBuildFile; fileRef = BB98252D1D6B01D50024A678 /* 底部.png */; };
-		BBCADC8C1D6BEF9300E7B53A /* CPFlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BBCADC8B1D6BEF9300E7B53A /* CPFlexibleButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +41,6 @@
 		BB98252B1D6AF2190024A678 /* CPDownListMenuAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDownListMenuAppearance.m; sourceTree = "<group>"; };
 		BB98252D1D6B01D50024A678 /* 底部.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部.png"; sourceTree = "<group>"; };
 		BB98252F1D6B0D710024A678 /* CPDownListMenuMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPDownListMenuMacro.h; sourceTree = "<group>"; };
-		BBCADC8A1D6BEF9300E7B53A /* CPFlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFlexibleButton.h; sourceTree = "<group>"; };
-		BBCADC8B1D6BEF9300E7B53A /* CPFlexibleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFlexibleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +99,6 @@
 		BB2A1AB81D62F0AA00F55FFF /* CPDownListMenu */ = {
 			isa = PBXGroup;
 			children = (
-				BBCADC8A1D6BEF9300E7B53A /* CPFlexibleButton.h */,
-				BBCADC8B1D6BEF9300E7B53A /* CPFlexibleButton.m */,
 				BB2A1AC21D62F50B00F55FFF /* UIView+CPGrid.h */,
 				BB2A1AC31D62F50B00F55FFF /* UIView+CPGrid.m */,
 				BB2A1AB91D62F0BE00F55FFF /* CPDownListMenu.h */,
@@ -195,7 +190,6 @@
 				BB2A1AA61D62EE8E00F55FFF /* AppDelegate.m in Sources */,
 				BB2A1AA31D62EE8E00F55FFF /* main.m in Sources */,
 				BB2A1ABB1D62F0BE00F55FFF /* CPDownListMenu.m in Sources */,
-				BBCADC8C1D6BEF9300E7B53A /* CPFlexibleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

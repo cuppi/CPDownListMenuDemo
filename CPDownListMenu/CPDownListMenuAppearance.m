@@ -50,7 +50,9 @@
 
 - (void)postNotificationWithUserInfo:(NSDictionary *)userInfo
 {
-    [[NSNotificationCenter defaultCenter]postNotificationName:__CPDownListMenuAppearance_kNotification object:nil userInfo:userInfo];
+    if (_menu) {
+        [[NSNotificationCenter defaultCenter]postNotificationName:__CPDownListMenuAppearance_kNotification object:_menu userInfo:userInfo];
+    }
 }
 
 @end

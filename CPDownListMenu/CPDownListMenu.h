@@ -19,6 +19,8 @@ static NSInteger const CPDownListMenuUnShow = -1;
 - (void)downListMenu:(CPDownListMenu *)downListMenu didSelectCellAtIndexPath:(NSIndexPath *)indexPath;
 - (void)downListMenu:(CPDownListMenu *)downListMenu willShowDownListAtIndex:(NSInteger)index;
 - (void)downListMenu:(CPDownListMenu *)downListMenu willHideDownListAtIndex:(NSInteger)index;
+- (BOOL)downListMenu:(CPDownListMenu *)downListMenu canShowDownListAtIndex:(NSInteger)index;
+- (BOOL)downListMenu:(CPDownListMenu *)downListMenu canHideDownListAtIndex:(NSInteger)index;
 @end
 
 @protocol CPDownListMenuDatasource <NSObject>

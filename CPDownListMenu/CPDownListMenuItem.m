@@ -8,7 +8,6 @@
 
 #import "CPDownListMenuItem.h"
 #import "UIView+CPGrid.h"
-#import "CPFlexibleButton.h"
 
 @implementation CPDownListMenuItem
 
@@ -28,10 +27,6 @@
 - (void)cp_configureCell
 {
     [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cp_actionClickGesture)]];
-    _titleButton = [CPFlexibleButton buttonWithType:UIButtonTypeCustom];
-    [self addSubview:_titleButton];
-    [_titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _titleButton.userInteractionEnabled = NO;
 }
 
 - (void)fillDataWithTitle:(NSString *)title
@@ -43,6 +38,15 @@
 - (void)layoutSubviews
 {
     _titleButton.frame = self.bounds;
+}
+
+- (void)setTitleButton:(UIButton *)titleButton
+{
+    [_titleButton removeFromSuperview];
+    _titleButton = titleButton;
+    [self addSubview:_titleButton];
+    _titleButton.frame = self.bounds;
+    _titleButton.userInteractionEnabled = NO;
 }
 
 /*

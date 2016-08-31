@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CPDownListMenu;
 
 @interface CPDownListMenuAppearance : NSObject
 @property (copy, nonatomic) UIColor *segmentColor;
@@ -16,4 +17,5 @@
 @property (retain, nonatomic) UIView *footerView;
 @property (retain, nonatomic) NSDictionary <NSString *, Class>*cellClassMap;
 @property (retain, nonatomic) NSDictionary <NSString *, UINib *>*cellNibMap;
+@property (weak, nonatomic) CPDownListMenu *menu;
 @end

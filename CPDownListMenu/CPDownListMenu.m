@@ -15,6 +15,7 @@
 {
     CPDownListMenuAppearance *_appearance;
     NSMutableArray <CPDownListMenuItem *>*_menuItems;
+    NSMutableArray <CALayer *>*_segmentLayers;
     UIView *_headerView;
     UIView *_dataView;
     UIView *_footerView;
@@ -68,8 +69,10 @@
 - (void)createMetadata
 {
     _menuItems = [NSMutableArray arrayWithCapacity:10];
+    _segmentLayers = [NSMutableArray arrayWithCapacity:9];
     _showMenuIndex = CPDownListMenuUnShow;
     _absoluteFrame = CGRectNull;
+    _appearance.menu = self;
 }
 
 - (void)createAppearanceListener
@@ -136,6 +139,10 @@
         [obj removeFromSuperview];
     }];
     [_menuItems removeAllObjects];
+    [_segmentLayers enumerateObjectsUsingBlock:^(CALayer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperlayer];
+    }];
+    [_segmentLayers removeAllObjects];
     
     NSInteger count = 1;
     if ([self.datasource respondsToSelector:@selector(numberOfMenuCellsInDownListMenu:)]) {
@@ -158,11 +165,27 @@
 #warning "The word - did is mismatch"
             if (_autoFoldDownList) {
                 if (_showMenuIndex != i) {
-                    [selfWeak showMenuAtIndex:i];
+                    if ([self.delegate respondsToSelector:@selector(downListMenu:canShowDownListAtIndex:)]) {
+                        if ([self.delegate downListMenu:self canShowDownListAtIndex:i]) {
+                            [selfWeak showMenuAtIndex:i];
+                        }
+                    }
+                    else
+                    {
+                        [selfWeak showMenuAtIndex:i];
+                    }
                 }
                 else
                 {
-                    [selfWeak hideMenu];
+                    if ([self.delegate respondsToSelector:@selector(downListMenu:canHideDownListAtIndex:)]) {
+                        if ([self.delegate downListMenu:self canHideDownListAtIndex:i]) {
+                            [selfWeak hideMenu];
+                        }
+                    }
+                    else
+                    {
+                        [selfWeak hideMenu];
+                    }
                 }
             }
             
@@ -173,6 +196,7 @@
         if (i) {
             CALayer *layer = [[CALayer alloc] init];
             [self.layer addSublayer:layer];
+            [_segmentLayers addObject:layer];
             layer.backgroundColor = _appearance.segmentColor.CGColor;
             layer.bounds = CGRectMake(0, 0, 1, height - 8*2);
             layer.position = CGPointMake(i*width, height/2);
@@ -204,6 +228,9 @@
 {
     if ([self.delegate respondsToSelector:@selector(downListMenu:willShowDownListAtIndex:)]) {
         [self.delegate downListMenu:self willShowDownListAtIndex:index];
+    }
+    if ([_dataView.superview isEqual:self]) {
+        NSLog(@"Are you sure the stickView is right?");
     }
     _showMenuIndex = index;
     [_footerView removeFromSuperview];
